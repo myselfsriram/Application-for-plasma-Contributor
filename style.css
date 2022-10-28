@@ -1,0 +1,23 @@
+body{
+background-color: red;
+box-sizing: 12;
+border: 0ch;
+text-align: center;
+text-shadow: 0mm;
+text-justify: auto;
+
+outline: 3px solid red;  
+border: 3px solid red;  
+
+border-top: 250px solid red;
+
+padding: 50px;  
+margin: 200px;  
+align-items: center;
+border: 6px ridge yellow;
+
+margin: auto;
+width: 50%;
+border: 6px solid yellow;
+padding: 10px; 
+}
