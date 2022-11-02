@@ -3,6 +3,7 @@ print("Content-Type:text/html")
 print()
 import cgi
 from logging import exception
+from operator import ne
 form=cgi.FieldStorage()
 blood=str(form.getvalue("blood")).upper()
 city=str(form.getvalue("city")).upper()
@@ -24,29 +25,25 @@ for i in list:
     name.append(i["Name"])
     city1.append(i["City"])
 flag=0
-new_name=[]
-new_phone=[]
-new_city=[]
 for i in blood1:
-    for j in city1:
-        if(blood==i and city==j):
-            k=blood1.index(i)
-            new_name.append(name[k])
-            new_city.append(city1[k])
-            new_phone.append(phone1[k])
-            name.pop(k)
-            city1.pop(k)
-            phone1.pop(k)
-            flag=1
-            break
+    if(blood==i):
+        for j in city1:
+            if(city==j):
+                k=city1.index(j)
+                print("<h2>Name:",name[k],"</h2>")
+                print("<h2>City:",city1[k],"</h2>")
+                flag=1
+                blood1.pop(k)
+                city1.pop(k)
+                name.pop(k)
+                
 if(flag==0):
     print("No persons are in our database")
+    print("</body></html>")
 if(flag==1):
     try:
         print("<html><head></head><body><link rel='stylesheet' href='style.css'>")
         print("<p><h2>Who do you wish to contact</h2><p>")
-        for i in new_name:
-            print("<h3>",i,"<h3>")
         print("<form  action='display.py' method='POST'>")
         print("Name:<input type='text' placeholder='Choose donor:' name='user'><br>")
         print("Enter your mail Adddress:<input type='mail' name='email' placeholder='email@gmail.com'><br>")
@@ -68,7 +65,3 @@ if(flag==1):
         result1=firebase.post("https://plasma-donor-application-default-rtdb.firebaseio.com/receivers",data)
     except Exception as e:
         print(e)
-def new():
-    n=new_city
-    k=new_name
-    l=new_phone
