@@ -25,11 +25,11 @@ for i in list:
     name.append(i["Name"])
     city1.append(i["City"])
 flag=0
-for i in blood1:
-    if(blood==i):
-        for j in city1:
-            if(city==j):
-                k=city1.index(j)
+for i in city1:
+    if(city==i):
+        for j in blood1:
+            if (j==blood):
+                k=blood1.index(j)
                 print("<h2>Name:",name[k],"</h2>")
                 print("<h2>City:",city1[k],"</h2>")
                 flag=1
