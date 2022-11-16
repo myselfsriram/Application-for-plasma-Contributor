@@ -22,6 +22,7 @@ import cgi
 form=cgi.FieldStorage()
 user=(str(form.getvalue("user"))).upper()
 mail=form.getvalue("email")
+uname=form.getvalue("uname")
 from firebase import firebase
 firebase=firebase.FirebaseApplication("https://plasma-donor-application-default-rtdb.firebaseio.com/",None)
 result=firebase.get("https://plasma-donor-application-default-rtdb.firebaseio.com/donor","")
@@ -30,6 +31,7 @@ blood1=[]
 city1=[]
 name=[]
 phone1=[]
+mail_id=[]
 for i in result:
     list.append(result[i])
 for i in list:
@@ -37,15 +39,17 @@ for i in list:
     phone1.append(i["Phone Number:"])
     name.append(i["Name"])
     city1.append(i["City"])
+    mail_id.append(i["Mail id"])
 print("<h2>Details are")
 for i in name:
     if(user==i):
         k=name.index(i)
         print("<h2> Phone number:",phone1[k],"</h2><br>")
         print("<h2>City:",city1[k],"</h2><br>")
+        l=mail_id[k]
         if __name__ == '__main__':
-            msg="This person requested {} Requested Plasma at {} Phone number was: {}".format(user,city1[k],phone1[k])
-            email_alert("Notify",msg,mail)
+            msg="This person requested {} Requested Plasma at {} Phone number was: {} mail id was:{}".format(uname,city1[k],phone1[k],mail)
+            email_alert("Notify",msg,l)
         break
         
 
